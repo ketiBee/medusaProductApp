@@ -1,4 +1,5 @@
 export type Product = {
+    
     title:string;
     description:string;
     thumbnail:string;
@@ -6,5 +7,5 @@ export type Product = {
     prices:any;
     amount:number;
     variants: [];
-    _id:number;
+    _id:string;
 }
