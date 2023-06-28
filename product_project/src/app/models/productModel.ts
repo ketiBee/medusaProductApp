@@ -7,5 +7,6 @@ export type Product = {
     prices:any;
     amount:number;
     variants: [];
+    collection:string;
     
 }
