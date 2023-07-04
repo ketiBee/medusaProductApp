@@ -55,7 +55,7 @@ export default async function ProductPage ({params}: {params : {slug:string}}) {
                                         width={200} height={200}/>
                              </div>
                              <div className="price">
-                                <h2><strong>Price: </strong>${product.product.variants[0]?.prices[1]?.amount}</h2>
+                                <h2><strong>Price: </strong>{product.product.variants[0]?.prices[1]?.amount}€ / ${product.product.variants[0]?.prices[0]?.amount}</h2>
                     
                              </div>
                              <div>

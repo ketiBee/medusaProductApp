@@ -6,7 +6,18 @@ export type Product = {
     handle:string;
     prices:any;
     amount:number;
-    variants: [];
+    variants: [
+        {
+            options:[{
+                value:string;
+                
+            }],
+            prices: [{
+                amount:number;
+        }]
+        }
+    ];
     collection:string;
+    
     
 }
