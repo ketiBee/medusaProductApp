@@ -14,7 +14,7 @@ export default function ProductVarients ({product}: ProductProps) {
     console.log(product);
     const allVarientsOptions = product.variants?.map((variant) => {
         const allOptions: Record<string, any>= {}
-
+        
         variant.options.map(item => {
             
             allOptions[item.value]=item.value;
@@ -25,23 +25,34 @@ export default function ProductVarients ({product}: ProductProps) {
        } 
         
     })
-
-    const defaultValues: Record<string, any>= {}
-
-    defaultValues[product.variants[0].options[0].value]=product.variants[0].options[0].value
-       
+    const defaultValuesOptions = product.variants.map(variant => {
+        const defaultValuesOptions: Record<string, any>= {}
     
+        variant.options.map(item => {
+            defaultValuesOptions[item.value]=item.value;
+        })
+
+        return{
+            value:defaultValuesOptions
+        }
+    })
+     
+
+   
 
 const[selectedVariant, setSelectedVariant]=useState(allVarientsOptions[0]);
-const [selectedOptions, setSelectedOptions]=useState(defaultValues)
+const [selectedOptions, setSelectedOptions]=useState( defaultValuesOptions[0].value);
 
 
-console.log('defaultValues', defaultValues);
+console.log('defaultValuesOptions', defaultValuesOptions[0].value);
 console.log('allVariantsOptions', allVarientsOptions);  
+
+
+
 
 function setOptions(value:string) {
     setSelectedOptions(prevState => {    
-        return {[value]:value}
+        return {prevState,[value]:value}
     })
 
     console.log('setOptions', selectedOptions);
@@ -52,14 +63,18 @@ function setOptions(value:string) {
         <div>
             <h2><strong>Choose Size</strong></h2>
             <div className="inline-flex items-center flex-wrap">
+    
             {product.variants.map((variant:any, id:number) => {
                 return(
-                    <div key={id}>
+                    <div  key={id}>
+                        
                         {variant.options.map((item:any) => {
                             
                             const id=`option-${item.value}`
                             const checked = selectedOptions[item.value] === item.value
                             
+
+
                             return(
                                 <label key={id} htmlFor={id}>
                                     <input
@@ -84,7 +99,7 @@ function setOptions(value:string) {
                                 </label>
                             )
                         }
-                        
+                    
 
                     
                         )}
@@ -97,5 +112,7 @@ function setOptions(value:string) {
         </>
     )
 }
+
+
 
 

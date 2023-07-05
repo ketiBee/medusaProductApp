@@ -68,7 +68,7 @@ export default function ProductList():JSX.Element {
 
   return (
   <>
-    <div className="container">
+    <div className="container xl:max-w-screen-xl mx-auto py-12 px-6">
       <div className="filter-container">
         <div>Filter by collection</div>
         <div>
@@ -88,7 +88,8 @@ export default function ProductList():JSX.Element {
         </div>
 
       </div>
-      <div className="cont grid grid-cols-4 gap-4 flex space-x-1" >
+      <div className="grid gap-8 xl:grid-cols-4 lg:grid-cols-2 grid-cols-1" >
+        
         {filteredList.map((prod:Product) => (
           <Link href={"products/" + prod.id} key={prod.id} >
             <div className="img">
@@ -96,16 +97,20 @@ export default function ProductList():JSX.Element {
                   src={prod.thumbnail}
                   alt={prod.title}
                 className="w-80 h-96"
+                style={{
+                  objectFit:'contain'
+                }}
                 
                 />
             </div>
-            <div className="title justify-self-center">
+            <div className="p-6">
                 
-                <p className="text-center font-medium">{prod.title}</p>
+                <p className="font-semibold text-lg self-center">{prod.title}</p>
                
             </div>
           </Link>
            ))}  
+           
       </div>
      
     </div>
