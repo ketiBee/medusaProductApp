@@ -68,10 +68,10 @@ export default function ProductList():JSX.Element {
 
   return (
   <>
-    <div className="container xl:max-w-screen-xl mx-auto py-12 px-6">
-      <div className="filter-container">
-        <div>Filter by collection</div>
-        <div>
+    <div className="flex flex-col justify-items-center container xl:max-w-screen-xl mx-auto px-6 py-6">
+      <div className="container flex justify-items-center py-6 px-6">
+        <span>Filter Products</span>
+        <div className="selector px-6">
           <select
             name="collection-list"
             id="collection-list"
