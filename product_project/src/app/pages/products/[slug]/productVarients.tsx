@@ -26,19 +26,22 @@ export default function ProductVarients ({product}: ProductProps) {
    
 
 
-const [selectedOptions, setSelectedOptions]=useState( defaultValuesOptions[0].value);
 
 
-console.log('defaultValuesOptions', defaultValuesOptions[0].value);
+
   
 
 const filtered = product.variants.map(variant => variant.options)
 
 var newArray: string[] = [];
 const uniqueValues = filtered.map(item => {
+    
     item.map(element => {
         newArray.push(element.value);
+        
     })
+
+
 })
 
 
@@ -51,7 +54,12 @@ function deduplicate(newArray:string[]){
  const filteredArray = deduplicate(newArray);
  console.log(filteredArray);
 
+ const defaultValues: Record<string, any>= {}
+ defaultValues[filteredArray[0]]=filteredArray[0];
 
+console.log('default', defaultValues);
+
+const [selectedOptions, setSelectedOptions]=useState( defaultValues);
 
 function setOptions(value:string) {
     setSelectedOptions(prevState => {    
@@ -64,38 +72,36 @@ function setOptions(value:string) {
     return (
         <>
         <div>
-            <h2><strong className="text-xl">Choose Size</strong></h2>
+            <h2><strong className="text-xl">Choose</strong></h2>
             <div className="inline-flex items-center flex-wrap">
     
-            {product.variants.map((variant:any, id:number) => {
-                return(
-                    <div  key={id}>
+          
                         
-                        {variant.options.map((item:any) => {
+                        {filteredArray.map((item:any, iden:number) => {
                             
-                            const id=`option-${item.value}`
-                            const checked = selectedOptions[item.value] === item.value
+                            const id=`option-${item}`
+                            const checked = selectedOptions[item] === item
                             
 
 
                             return(
-                                <label key={id} htmlFor={id}>
+                                <label key={iden} htmlFor={id}>
                                     <input
                                     className="sr-only"
                                     id={id}
                                     type='radio'
-                                    name={item.value}
-                                    value={item.value}
+                                    name={item}
+                                    value={item}
                                     checked={checked}
                                     
                                     onChange={() => {
-                                        setOptions(item.value)
+                                        setOptions(item)
                                     }}
                                     
                                     />
                                     <div className={`p-2 my-3 text-lg rounded-full block cursor-pointer mr-3 ${checked ? 
                                     "text-white bg-gray-900" : "text-gray-900 bg-gray-200"}`}>
-                                        <span className="px-2">{item.value}</span>
+                                        <span className="px-2">{item}</span>
 
                                     </div>
 
@@ -108,10 +114,10 @@ function setOptions(value:string) {
                         )}
 
                     </div>
-                )
-            })}
+             
+           
             </div>
-        </div>
+        
         </>
     )
 }
