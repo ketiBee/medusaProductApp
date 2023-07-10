@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 
 
 import { medusa } from "@/app/requests/medusaClient";
@@ -46,24 +47,26 @@ export default async function ProductPage ({params}: {params : {slug:string}}) {
         <>
 
         
-        <div className="container lg:max-w-screen-lg mx-auto py-12 px-6" >
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md space-x-12">
+        <div className="container lg:max-w-screen-lg mx-auto py-12 px-6 bg-my_bg_image" >
+            <div className="flex flex-col md:flex-row justify-around items-center space-y-12 md:space-y-0 md space-x-12">
             
                
-                             <div className=" w-50 h-50 sm:w-96 sm:h-96">
+                             <div className=" w-80 h-96 sm:w-50 sm:h-68">
                                  <img 
                                  src={product.product.thumbnail} 
                                  alt={product.product.title} 
-                                width={350}
-                                height={350}
+                                 className="w-80 h-96"
+                                style={{
+                                    objectFit:'contain'
+                                }}
                                 
                                         />
                              </div>
             
              <div className="w-full flex-1 max-w-md">
-             <h2 className="font-semibold text-center text-2xl">{product.product.title}</h2>
-                             <div className="price px-6 py-6">
-                             <h2 className="text-xl"><strong>Price: </strong>{product.product.variants[0]?.prices[1]?.amount}€ / ${product.product.variants[0]?.prices[0]?.amount}</h2>
+             <h2 className="font-semibold text-center text-4xl text-gray-900">{product.product.title}</h2>
+                             <div className="price px-6 py-6 ">
+                             <h2 className="text-xl font-semibold"><strong className="text-2xl">Price: </strong>{product.product.variants[0]?.prices[1]?.amount}€ / ${product.product.variants[0]?.prices[0]?.amount}</h2>
                     
                              </div>
                              <div className="px-6">

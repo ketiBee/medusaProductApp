@@ -1,8 +1,6 @@
 "use client"
 
 import { Product } from "@/app/models/productModel"
-import { connect } from "http2";
-import { Vazirmatn } from "next/font/google";
 import { useState } from "react";
 
 interface ProductProps {
@@ -11,20 +9,7 @@ interface ProductProps {
 
 export default function ProductVarients ({product}: ProductProps) {
     
-    console.log(product);
-    const allVarientsOptions = product.variants?.map((variant) => {
-        const allOptions: Record<string, any>= {}
-        
-        variant.options.map(item => {
-            
-            allOptions[item.value]=item.value;
-        })
-
-       return {
-        options: allOptions
-       } 
-        
-    })
+    console.log(product)
     const defaultValuesOptions = product.variants.map(variant => {
         const defaultValuesOptions: Record<string, any>= {}
     
@@ -40,13 +25,31 @@ export default function ProductVarients ({product}: ProductProps) {
 
    
 
-const[selectedVariant, setSelectedVariant]=useState(allVarientsOptions[0]);
+
 const [selectedOptions, setSelectedOptions]=useState( defaultValuesOptions[0].value);
 
 
 console.log('defaultValuesOptions', defaultValuesOptions[0].value);
-console.log('allVariantsOptions', allVarientsOptions);  
+  
 
+const filtered = product.variants.map(variant => variant.options)
+
+var newArray: string[] = [];
+const uniqueValues = filtered.map(item => {
+    item.map(element => {
+        newArray.push(element.value);
+    })
+})
+
+
+
+
+function deduplicate(newArray:string[]){
+    return Array.from(new Set(newArray).values());
+}
+
+ const filteredArray = deduplicate(newArray);
+ console.log(filteredArray);
 
 
 
@@ -61,7 +64,7 @@ function setOptions(value:string) {
     return (
         <>
         <div>
-            <h2><strong>Choose Size</strong></h2>
+            <h2><strong className="text-xl">Choose Size</strong></h2>
             <div className="inline-flex items-center flex-wrap">
     
             {product.variants.map((variant:any, id:number) => {

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { SetStateAction, useEffect, useMemo, useState } from "react";
@@ -68,9 +69,9 @@ export default function ProductList():JSX.Element {
 
   return (
   <>
-    <div className="flex flex-col justify-items-center container xl:max-w-screen-xl mx-auto px-6 py-6">
+    <div className="flex flex-col justify-items-center container xl:max-w-screen-xl mx-auto px-6 py-6 bg-my_bg_image">
       <div className="container flex justify-items-center py-6 px-6">
-        <span>Filter Products</span>
+        <span className="font-semibold text-lg">Filter Products</span>
         <div className="selector px-6">
           <select
             name="collection-list"
@@ -96,18 +97,19 @@ export default function ProductList():JSX.Element {
                 <img
                   src={prod.thumbnail}
                   alt={prod.title}
-                className="w-80 h-96"
-                style={{
-                  objectFit:'contain'
+                  className="w-80 h-96"
+                  style={{
+                    objectFit:'contain'
                 }}
                 
                 />
             </div>
-            <div className="p-6">
+            <div className="p-4 flex justify-center">
                 
-                <p className="font-semibold text-lg self-center">{prod.title}</p>
+                <p className="font-semibold text-2xl self-center text-gray-900">{prod.title}</p>
                
             </div>
+          
           </Link>
            ))}  
            
